@@ -1,0 +1,76 @@
+<!-- Config file for the engine -->
+
+<config>
+  <engine>
+    <title>My platformer game</title>
+    <maxFrameDuration value="8"/>
+  </engine>
+
+  <render>
+    <vsync value="false"/>
+  </render>
+
+  <window>
+    <resolution width="960" height="960" scale="1"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="true"/>
+    <fullscreen_window value="false"/>
+  </window>
+
+  <scene>
+    <map path="Assets/Maps/" name="DefMap.tmx"/>
+    <entities>
+		<player x="160" y="832" w="64" h ="64" texture="Assets/Textures/player/charlieTheCapybaraAnimationSheet.png">
+        <animations>
+          <idle loop="true" speed ="0.2">
+            <frame x="0" y="64" w="64" h="64"/>
+            <frame x="64" y="64" w="64" h="64"/>
+            <frame x="128" y="64" w="64" h="64"/>
+            <frame x="192" y="64" w="64" h="64"/>
+            <frame x="256" y="64" w="64" h="64"/>
+          </idle>
+			<right loop="true" speed ="0.2">
+				<frame x="0" y="512" w="64" h="64"/>
+				<frame x="64" y="512" w="64" h="64"/>
+				<frame x="128" y="512" w="64" h="64"/>
+				<frame x="192" y="512" w="64" h="64"/>
+			</right>
+			<left loop="true" speed ="0.2">
+				<frame x="0" y="448" w="64" h="64"/>
+				<frame x="64" y="448" w="64" h="64"/>
+				<frame x="128" y="448" w="64" h="64"/>
+				<frame x="192" y="448" w="64" h="64"/>
+			</left>
+			<down loop="true" speed ="0.2">
+				<frame x="0" y="320" w="64" h="64"/>
+				<frame x="64" y="320" w="64" h="64"/>
+				<frame x="128" y="320" w="64" h="64"/>
+				<frame x="192" y="320" w="64" h="64"/>
+			</down>
+			<up loop="true" speed ="0.2">
+				<frame x="0" y="384" w="64" h="64"/>
+				<frame x="64" y="384" w="64" h="64"/>
+				<frame x="128" y="384" w="64" h="64"/>
+				<frame x="192" y="384" w="64" h="64"/>
+			</up>
+        </animations>
+       </player>
+	   <enemy x="160" y="832" w="64" h ="64" texture="Assets/Textures/Enemy.png">
+		 <animations>
+			 <left loop="true" speed ="0.2">
+				 <frame x="0" y="0" w="64" h="64"/>
+			 	 <frame x="0" y="0" w="64" h="64"/>
+
+			 </left>
+			 <right loop="true" speed ="0.2">
+			 	 <frame x="64" y="0" w="64" h="64"/>
+			 	 <frame x="64" y="0" w="64" h="64"/>
+
+			</right>
+		</animations>
+	  </enemy>
+    </entities>
+  </scene>
+	
+</config>
