@@ -3,7 +3,7 @@
 <config>
   <engine>
     <title>My platformer game</title>
-    <maxFrameDuration value="8"/>
+    <maxFrameDuration value="16"/>
   </engine>
 
   <render>

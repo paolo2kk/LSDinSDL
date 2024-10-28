@@ -63,15 +63,6 @@ bool Scene::Start()
 	// Posicionar al jugador y objetos
 	player->position = Vector2D(160, 832);
 	playerps1 = Vector2D(160, 910);
-	parallax.setPlayer(player);
-
-	SDL_Texture* bgTexture1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
-	SDL_Texture* bgTexture2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer2.png");
-	if (!bgTexture1 || !bgTexture2) {
-		LOG("Failed to load textures for parallax layers!");
-	}
-	parallax.addLayer(bgTexture1, 5);
-	parallax.addLayer(bgTexture2, 10);
 
 	enemy_LVL2->position = Vector2D(1100, 585);
 	enemy_LVL2->stage = 2;
@@ -94,7 +85,7 @@ bool Scene::Update(float dt)
 {
 		cameraX = player->position.getX() - 400;  	float camSpeed = 1;
 	
-		parallax.setPlayerPosition(player->position.getX());
+
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
@@ -128,10 +119,87 @@ bool Scene::Update(float dt)
 	{
 		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250, 250, NULL, 0.0f);
 	}
-	parallax.updateAndRender();
-	//aaa
 
-	// Actualizar y renderizar el fondo parallax
+	
+
+	
+	
+	//haz que dependiendo de la tecla numerica que pulses se cambie la escena del 1-10
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		stage = 1;
+		isSceneSetted = false;
+		SetLevel(1);
+		Engine::GetInstance().render.get()->camera.x = (stage-1) * 960;
+		
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		stage = 2;
+		isSceneSetted = false;
+		SetLevel(2);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+		
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		stage = 3;
+		isSceneSetted = false;
+		SetLevel(3);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	{
+		stage = 4;
+		isSceneSetted = false;
+		SetLevel(4);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	{
+		stage = 5;
+		isSceneSetted = false;
+		SetLevel(5);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		stage = 6;
+		isSceneSetted = false;
+		SetLevel(6);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+	{
+		stage = 7;
+		isSceneSetted = false;
+		SetLevel(7);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	{
+		stage = 8;
+		isSceneSetted = false;
+		SetLevel(8);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		stage = 9;
+		isSceneSetted = false;
+		SetLevel(9);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		stage = 10;
+		isSceneSetted = false;
+		SetLevel(10);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+
 
 	TriggerManagement();
 	SceneChange();
@@ -279,7 +347,7 @@ void Scene::SceneChange()
 
 		
 	}
-	if (player->position.getY() > 1400)
+	if (player->position.getY() > 1400 ||player->position.getY() < 0)
 	{
 		isSceneSetted = false;
 		SetLevel(stage);

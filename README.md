@@ -30,7 +30,7 @@ in Linking, the Sapient Dream
 **_Unzip the release folder and execute the .exe file._**
 
 ## Game Controls
-### Intro    
+   
 ### Player
     * W -> Move up
     * A -> Move to the left

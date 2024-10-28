@@ -72,7 +72,7 @@ Engine& Engine::GetInstance() {
     return instance;
 }
 
-void Engine::AddModule(std::shared_ptr<Module> module){
+void Engine::AddModule(std::shared_ptr<Module> module) {
     module->Init();
     moduleList.push_back(module);
 }
@@ -97,10 +97,10 @@ bool Engine::Awake() {
     bool result = true;
     for (const auto& module : moduleList) {
         module.get()->LoadParameters(configFile.child("config").child(module.get()->name.c_str()));
-        result =  module.get()->Awake();
+        result = module.get()->Awake();
         if (!result) {
-			break;
-		}
+            break;
+        }
     }
 
     LOG("Timer App Awake(): %f", timer.ReadMSec());
@@ -133,25 +133,6 @@ bool Engine::Start() {
 // Called each loop iteration
 bool Engine::Update() {
 
-	
-	//si pulso f11 se activa o desactiva el cap de frames
-	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
-	{
-		if (capFrames == true)
-		{
-			capFrames = false;
-		}
-		else
-		{
-			capFrames = true;
-		}
-	}
-
-    if (capFrames == false) {
-        maxFrameDuration = 8;
-    }
-    else maxFrameDuration = 33;
-
     bool ret = true;
     PrepareUpdate();
 
@@ -166,6 +147,15 @@ bool Engine::Update() {
 
     if (ret == true)
         ret = PostUpdate();
+
+    if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F11) == KEY_DOWN && maxFrameDuration != 32)
+    {
+        maxFrameDuration = 32;
+    }
+    else if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F11) == KEY_DOWN && maxFrameDuration == 32)
+    {
+        maxFrameDuration = 16;
+    }
 
     FinishUpdate();
     return ret;
@@ -199,6 +189,7 @@ void Engine::PrepareUpdate()
     frameTime.Start();
 }
 
+
 // ---------------------------------------------
 void Engine::FinishUpdate()
 {
@@ -219,6 +210,7 @@ void Engine::FinishUpdate()
 
     // Amount of time since game start (use a low resolution timer)
     secondsSinceStartup = startupTime.ReadSec();
+    Mtime = startupTime.ReadMSec();
 
     // Amount of ms took the last update (dt)
     dt = (float)frameTime.ReadMs();
