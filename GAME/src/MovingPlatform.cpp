@@ -70,7 +70,7 @@ bool MovingPlatform::Update(float dt)
     {
         if (movingLeft)
         {
-            velocity.x = -0.4f * dt; 
+            velocity.x = -0.4 * dt; 
             velocity.y = 0; 
             if (position.getX() <= 1000) {
                 movingLeft = false;

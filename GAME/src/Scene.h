@@ -74,7 +74,7 @@ private:
 	//scenification
 	const int totalStages = 10;
 	bool isSceneSetted = false;
-
+	const int boundaryBuffer = 20;
 	bool doneLVL1 = false;
 	bool help = false;
 

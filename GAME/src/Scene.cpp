@@ -100,24 +100,6 @@ bool Scene::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 		isSceneSetted = false;
 		
-	//si pulso la tecla h aparece el menu de ayuda que es una textura png y si vuelvo a pulsar la tecla h desaparece
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
-	{
-		if (help == false)
-		{
-			help = true;
-		}
-		else
-		{
-			help = false;
-		}
-	}
-
-	if (help == true)
-	{
-		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250,250, NULL, 0.0f);
-	}
-
 
 	//aaa
 
@@ -207,23 +189,23 @@ void Scene::SetLevel(int stage) {
 	}
 }
 
+
 void Scene::SceneChange()
 {
+	SetLevel(stage); 
 
-	SetLevel(stage);
+    if (player->position.getX() >= windowSizeX * stage - 100 && stage < totalStages) {
+        Engine::GetInstance().render.get()->camera.x = -windowSizeX * stage; 
+        stage++;
+        isSceneSetted = false; 
+    } 
+    /*else if (player->position.getX() < windowSizeX * (stage - 1) && stage > 1) {
+        Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 2);
+        stage--; 
+        isSceneSetted = false;
+    }*/
 
-	if (player->position.getX() >= windowSizeX * stage - 100 && stage < totalStages) {
-		Engine::GetInstance().render.get()->camera.x = -windowSizeX * stage;
-		stage++;
-		isSceneSetted = false;
-	}
-	/* else if (player->position.getX() < windowSizeX(stage - 1) && stage > 1) {
-		Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 2);
-		stage--;
-		isSceneSetted = false;
-	}*/
-
-		SetLevel(stage);
+    SetLevel(stage); 
 
 	//entity stage management
 	for (Entity* entity : Engine::GetInstance().entityManager.get()->entities) {
