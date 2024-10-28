@@ -48,7 +48,8 @@ bool Scene::Awake()
 	// L04: Create a box
 	box1_LVL1 = (Box*)Engine::GetInstance().entityManager->CreateEntity(EntityType::BOX);
 
-	mv_pltf_LVL2 = (MovingPlatform*)Engine::GetInstance().entityManager->CreateEntity(EntityType::MOVING_PLATFORML);
+	mv_pltf_LVL2 = (MovingPlatform*)Engine::GetInstance().entityManager->CreateEntity(EntityType::MOVING_PLATFORMR);
+	mv_pltf_LVL7 = (MovingPlatform*)Engine::GetInstance().entityManager->CreateEntity(EntityType::MOVING_PLATFORMR);
 
 	return ret;
 }
@@ -73,6 +74,8 @@ bool Scene::Start()
 	mv_pltf_LVL2->position = Vector2D(1200, 835);
 	mv_pltf_LVL2->stage = 2;
 
+	mv_pltf_LVL7->position = Vector2D(6300, 892);
+	mv_pltf_LVL7->stage = 7;
 	
 	return true;
 }
@@ -80,10 +83,9 @@ bool Scene::Start()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	// Movimiento de la cámara basado en el jugador
-	cameraX = player->position.getX() - 400;  // Mantener al jugador centrado horizontalmente
-	float camSpeed = 1;
-	//parallax.updateAndRender();
+		cameraX = player->position.getX() - 400;  	float camSpeed = 1;
+	
+
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
