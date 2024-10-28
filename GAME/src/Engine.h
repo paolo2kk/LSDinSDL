@@ -104,6 +104,8 @@ public:
 	// L08: TODO 2: Add Physics module
 	std::shared_ptr<Physics> physics;
 
+	unsigned int Mtime = 0;
+
 
 private: 
 
