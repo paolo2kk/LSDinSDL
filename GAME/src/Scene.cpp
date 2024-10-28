@@ -201,6 +201,31 @@ void Scene::SetLevel(int stage) {
 			player->lastDirection = NONE;
 			player->SetAnimation(Direction::RIGHT);
 			break;
+		case 7:
+			player->SetPosition(Vector2D(5817, 621));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
+		case 8:
+			player->SetPosition(Vector2D(6826, 215));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
+		case 9:
+
+			player->SetPosition(Vector2D(7821, 649));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
+		case 10:
+			player->SetPosition(Vector2D(8777, 820));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
 		}
 
 		// Mark the scene as set to avoid multiple calls
