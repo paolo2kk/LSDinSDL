@@ -14,7 +14,7 @@ Physics::Physics() : Module()
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -220,8 +220,9 @@ bool Physics::PostUpdate()
 	bool ret = true;
 
 	// Activate or deactivate debug mode
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		if (debug) debug = false;
+		else debug = true;
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
 
