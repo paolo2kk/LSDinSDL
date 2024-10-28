@@ -100,6 +100,24 @@ bool Scene::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 		isSceneSetted = false;
 		
+	//si pulso la tecla h aparece el menu de ayuda que es una textura png y si vuelvo a pulsar la tecla h desaparece
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		if (help == false)
+		{
+			help = true;
+		}
+		else
+		{
+			help = false;
+		}
+	}
+
+	if (help == true)
+	{
+		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250,250, NULL, 0.0f);
+	}
+
 
 	//aaa
 
@@ -133,12 +151,11 @@ void Scene::TriggerManagement()
 	}
 }
 
-void Scene::SetLevel(int stage)
-{
-	if (!isSceneSetted/* && Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_REPEAT*/)
-	{
-		switch (stage)
-		{
+void Scene::SetLevel(int stage) {
+	// Only proceed if the scene is not already set
+	if (!isSceneSetted) {
+		// Set player position, animation, and reset other elements based on the current stage
+		switch (stage) {
 		case 1:
 			player->SetPosition(playerps1);
 			box1_LVL1->SetPosition(Vector2D(704, 910));
@@ -146,8 +163,8 @@ void Scene::SetLevel(int stage)
 			player->velocity.Set(0, 0);
 			player->lastDirection = NONE;
 			player->SetAnimation(Direction::RIGHT);
-
 			break;
+
 		case 2:
 			player->SetPosition(Vector2D(1080, 250));
 			player->velocity.Set(0, 0);
@@ -155,49 +172,58 @@ void Scene::SetLevel(int stage)
 			enemy_LVL2->SetPosition(Vector2D(1100, 585));
 			enemy_LVL2->velocity.Set(0, 0);
 			mv_pltf_LVL2->SetPosition(Vector2D(1200, 835));
-
 			break;
+
 		case 3:
 			player->SetPosition(Vector2D(2000, 750));
 			player->velocity.Set(0, 0);
 			player->SetAnimation(Direction::RIGHT);
+			break;
+
 		case 4:
-			player->SetPosition(Vector2D(2900, 260));
+			player->SetPosition(Vector2D(2971, 280));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
+
 		case 5:
-			player->SetPosition(Vector2D(3900, 835));;
+			player->SetPosition(Vector2D(3970, 835));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
+
 		case 6:
-			player->SetPosition(Vector2D(4810, 120));
+			player->SetPosition(Vector2D(4900, 120));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
+			break;
 		}
+
+		// Mark the scene as set to avoid multiple calls
 		isSceneSetted = true;
-		
 	}
-	
 }
 
 void Scene::SceneChange()
 {
 
-	for (int i = 1; i <= totalStages; ++i) {
-		if (stage == i) {
-			SetLevel(stage);
+	SetLevel(stage);
 
-			if (player->position.getX() >= windowSizeX * i && stage < totalStages) {
-				stage++;
-				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
-				isSceneSetted = false;
-				SetLevel(stage); 
-			}
-
-			else if (player->position.getX() < windowSizeX * (i - 1) && stage > 1) {
-				stage--;
-				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
-				isSceneSetted = false;
-				SetLevel(stage); 
-			}
-
-			break; 
-		}
+	if (player->position.getX() >= windowSizeX * stage - 100 && stage < totalStages) {
+		Engine::GetInstance().render.get()->camera.x = -windowSizeX * stage;
+		stage++;
+		isSceneSetted = false;
 	}
+	/* else if (player->position.getX() < windowSizeX(stage - 1) && stage > 1) {
+		Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 2);
+		stage--;
+		isSceneSetted = false;
+	}*/
+
+		SetLevel(stage);
 
 	//entity stage management
 	for (Entity* entity : Engine::GetInstance().entityManager.get()->entities) {

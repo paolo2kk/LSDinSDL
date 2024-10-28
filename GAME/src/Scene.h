@@ -76,5 +76,6 @@ private:
 	bool isSceneSetted = false;
 
 	bool doneLVL1 = false;
+	bool help = false;
 
 };

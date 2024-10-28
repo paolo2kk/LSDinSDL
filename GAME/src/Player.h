@@ -86,4 +86,6 @@ public:
 	bool canChangeDirection = true;
 	bool isCornerCollision = false;
 
+	bool godMode = false;
+
 };

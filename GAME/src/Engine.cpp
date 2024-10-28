@@ -133,6 +133,25 @@ bool Engine::Start() {
 // Called each loop iteration
 bool Engine::Update() {
 
+	
+	//si pulso f11 se activa o desactiva el cap de frames
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		if (capFrames == true)
+		{
+			capFrames = false;
+		}
+		else
+		{
+			capFrames = true;
+		}
+	}
+
+    if (capFrames == false) {
+        maxFrameDuration = 16;
+    }
+    else maxFrameDuration = 33;
+
     bool ret = true;
     PrepareUpdate();
 

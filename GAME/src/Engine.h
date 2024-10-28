@@ -127,6 +127,7 @@ private:
 
 	//Maximun frame duration in miliseconds.
 	int maxFrameDuration = 16;
+	bool capFrames = false;
 
 	std::string gameTitle = "Platformer Game";
 
