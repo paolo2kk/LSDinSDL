@@ -11,6 +11,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "EntityManager.h"
+#include "ParallaxBackground.h"
 #include "Map.h"
 #include "Physics.h"
 
@@ -38,7 +39,10 @@ Engine::Engine() {
     physics = std::make_shared<Physics>();
     scene = std::make_shared<Scene>();
     map = std::make_shared<Map>();
+    parallax = std::make_shared<ParallaxBackground>();
+
     entityManager = std::make_shared<EntityManager>();
+
 
     // Ordered for awake / Start / Update
     // Reverse order of CleanUp
@@ -49,6 +53,8 @@ Engine::Engine() {
     // L08: TODO 2: Add Physics module
     AddModule(std::static_pointer_cast<Module>(physics));
     AddModule(std::static_pointer_cast<Module>(map));
+    AddModule(std::static_pointer_cast<Module>(parallax));
+
     AddModule(std::static_pointer_cast<Module>(scene));
     AddModule(std::static_pointer_cast<Module>(entityManager));
 

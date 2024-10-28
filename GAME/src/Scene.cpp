@@ -21,11 +21,9 @@ Scene::Scene() : Module()
 Scene::~Scene()
 {}
 
-// Variables del fondo parallax
-ParallaxBackground parallax; // Fondo parallax
-int cameraX = 0; // Posición de la cámara
+ParallaxBackground parallax; 
+int cameraX = 0; 
 
-// Called before render is available
 bool Scene::Awake()
 {
 	LOG("Loading Scene");
@@ -61,14 +59,6 @@ bool Scene::Start()
 	// Cargar el mapa
 	Engine::GetInstance().map->Load("Assets/Maps/", "DefMap.tmx");
 
-	// Inicializar el fondo parallax
-	SDL_Texture* bgTexture1 = IMG_LoadTexture(Engine::GetInstance().render->renderer, "Assets/Textures/layer1.png");
-	SDL_Texture* bgTexture2 = IMG_LoadTexture(Engine::GetInstance().render->renderer, "Assets/Textures/layer2.png");
-
-	// Agregar las capas del fondo parallax
-	parallax.addLayer(bgTexture1, 5);  // Capa 1 con velocidad 5
-	parallax.addLayer(bgTexture2, 10); // Capa 2 con velocidad 10
-
 	// Posicionar al jugador y objetos
 	player->position = Vector2D(160, 832);
 	playerps1 = Vector2D(160, 910);
@@ -93,6 +83,7 @@ bool Scene::Update(float dt)
 	// Movimiento de la cámara basado en el jugador
 	cameraX = player->position.getX() - 400;  // Mantener al jugador centrado horizontalmente
 	float camSpeed = 1;
+	//parallax.updateAndRender();
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
@@ -111,7 +102,6 @@ bool Scene::Update(float dt)
 		
 
 	// Actualizar y renderizar el fondo parallax
-	parallax.updateAndRender(Engine::GetInstance().render->renderer, cameraX);
 
 	TriggerManagement();
 	SceneChange();
