@@ -101,6 +101,8 @@ bool Scene::Update(float dt)
 		isSceneSetted = false;
 		
 
+	//aaa
+
 	// Actualizar y renderizar el fondo parallax
 
 	TriggerManagement();
