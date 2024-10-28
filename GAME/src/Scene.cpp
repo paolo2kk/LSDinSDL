@@ -102,6 +102,23 @@ bool Scene::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
 		isSceneSetted = false;
 		
+	//si pulsas a la tecla h aparece la textura help
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	{
+		if (help == false)
+		{
+			help = true;
+		}
+		else
+		{
+			help = false;
+		}
+	}
+
+	if (help == true)
+	{
+		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250, 250, NULL, 0.0f);
+	}
 
 	//aaa
 
