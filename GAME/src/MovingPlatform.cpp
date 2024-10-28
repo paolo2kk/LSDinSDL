@@ -20,7 +20,7 @@ MovingPlatform::MovingPlatform(bool movingLeftt, bool movingRightt) : Entity(Ent
 MovingPlatform::~MovingPlatform() {
 
 }
-
+//a
 bool MovingPlatform::Awake() {
    return true;
 }

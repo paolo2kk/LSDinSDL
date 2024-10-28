@@ -148,7 +148,7 @@ bool Engine::Update() {
 	}
 
     if (capFrames == false) {
-        maxFrameDuration = 16;
+        maxFrameDuration = 8;
     }
     else maxFrameDuration = 33;
 
