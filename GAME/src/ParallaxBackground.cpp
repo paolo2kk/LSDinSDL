@@ -1,6 +1,18 @@
 #include "ParallaxBackground.h"
+#include "Engine.h"
+#include "Render.h"
+#include "Textures.h"
 #include <SDL2/SDL.h>
 
+bool ParallaxBackground::Start() {
+
+    bgTexture1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
+    bgTexture2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer2.png");
+    //parallax.addLayer(bgTexture1, 5);  // Capa 1 con velocidad 5
+    //parallax.addLayer(bgTexture2, 10); // Capa 2 con velocidad 10
+    //parallax.updateAndRender(Engine::GetInstance().render->renderer, cameraX);
+    return true;
+}
 
 // Constructor para la clase ParallaxLayer
 ParallaxLayer::ParallaxLayer(SDL_Texture* texture, int speed)
@@ -32,15 +44,19 @@ ParallaxBackground::ParallaxBackground() {}
 ParallaxBackground::~ParallaxBackground() {
     // No hacemos nada ya que SDL_DestroyTexture debería ser manejado externamente
 }
-
-// Agrega una nueva capa al vector de capas
-void ParallaxBackground::addLayer(SDL_Texture* texture, int speed) {
-    layers.emplace_back(texture, speed);
+bool ParallaxBackground::Update(float dt) {
+    //updateAndRender();
+    Engine::GetInstance().render.get()->DrawTexture(bgTexture1, 0, 0);
+    return true;  // Continue the update cycle
 }
 
-// Actualiza y renderiza todas las capas del fondo parallax
-void ParallaxBackground::updateAndRender(SDL_Renderer* renderer, int cameraX) {
+void ParallaxBackground::updateAndRender() {
+
     for (ParallaxLayer& layer : layers) {
-        layer.render(renderer, cameraX);
+        //layer.render(renderer, cameraX);  // Use the stored renderer and cameraX
     }
+}
+
+void ParallaxBackground::addLayer(SDL_Texture* texture, int speed) {
+    layers.emplace_back(texture, speed);
 }
