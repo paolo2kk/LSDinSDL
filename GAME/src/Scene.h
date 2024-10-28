@@ -71,7 +71,8 @@ private:
 	//LVL2
 	MovingPlatform* mv_pltf_LVL2;
 
-
+	//scenification
+	const int totalStages = 10;
 	bool isSceneSetted = false;
 
 	bool doneLVL1 = false;

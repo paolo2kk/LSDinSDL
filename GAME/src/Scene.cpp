@@ -145,15 +145,28 @@ void Scene::SetLevel(int stage)
 			player->canChangeDirection = true;
 			player->velocity.Set(0, 0);
 			player->lastDirection = NONE;
-			
+			player->SetAnimation(Direction::RIGHT);
+
 			break;
 		case 2:
 			player->SetPosition(Vector2D(1080, 250));
+			player->velocity.Set(0, 0);
+			player->SetAnimation(Direction::RIGHT);
 			enemy_LVL2->SetPosition(Vector2D(1100, 585));
 			enemy_LVL2->velocity.Set(0, 0);
 			mv_pltf_LVL2->SetPosition(Vector2D(1200, 835));
 
 			break;
+		case 3:
+			player->SetPosition(Vector2D(2000, 750));
+			player->velocity.Set(0, 0);
+			player->SetAnimation(Direction::RIGHT);
+		case 4:
+			player->SetPosition(Vector2D(2900, 260));
+		case 5:
+			player->SetPosition(Vector2D(3900, 835));;
+		case 6:
+			player->SetPosition(Vector2D(4810, 120));
 		}
 		isSceneSetted = true;
 		
@@ -164,36 +177,26 @@ void Scene::SetLevel(int stage)
 void Scene::SceneChange()
 {
 
-	switch (stage) {
-	case 1:
-		SetLevel(1);
-		if (player->position.getX() >= windowSizeX)
-		{
-			Engine::GetInstance().render.get()->camera.x = -windowSizeX;
-			stage++;
-			isSceneSetted = false;
-			SetLevel(2);
+	for (int i = 1; i <= totalStages; ++i) {
+		if (stage == i) {
+			SetLevel(stage);
 
+			if (player->position.getX() >= windowSizeX * i && stage < totalStages) {
+				stage++;
+				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
+				isSceneSetted = false;
+				SetLevel(stage); 
+			}
+
+			else if (player->position.getX() < windowSizeX * (i - 1) && stage > 1) {
+				stage--;
+				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
+				isSceneSetted = false;
+				SetLevel(stage); 
+			}
+
+			break; 
 		}
-		
-
-		break;
-
-	case 2:
-		if (player->position.getX() < windowSizeX)
-		{
-			Engine::GetInstance().render.get()->camera.x = 0;
-			stage--;
-			isSceneSetted = false;
-
-		}
-		else
-		if (player->position.getX() >= windowSizeX * 2)
-		{
-			Engine::GetInstance().render.get()->camera.x = -windowSizeX * 2;
-			stage++;
-		}
-		break;
 	}
 
 	//entity stage management
@@ -214,6 +217,11 @@ void Scene::SceneChange()
 		}
 
 		
+	}
+	if (player->position.getY() > 1400)
+	{
+		isSceneSetted = false;
+		SetLevel(stage);
 	}
 
 }

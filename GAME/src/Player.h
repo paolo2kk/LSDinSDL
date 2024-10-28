@@ -32,6 +32,8 @@ public:
 
 	bool CleanUp();
 
+	void SetAnimation(Direction dir);
+
 	void SetPosition(Vector2D newPosition) {
 		position = newPosition;
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(newPosition.getX()), PIXEL_TO_METERS(newPosition.getY())), 0); 

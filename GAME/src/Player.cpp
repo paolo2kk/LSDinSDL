@@ -77,6 +77,26 @@ void Player::GravityChange(b2Vec2& velocity)
 	}
 }
 
+void Player::SetAnimation(Direction dir)
+{
+	switch (dir)
+	{
+	case Direction::UP:
+		currentAnimation = &up;
+		break;
+	case Direction::DOWN:
+		currentAnimation = &down;
+		break;
+	case Direction::LEFT:
+		currentAnimation = &left;
+		break;
+	case Direction::RIGHT:
+		currentAnimation = &right;
+		break;
+
+	}
+}
+
 bool Player::Update(float dt)
 {
 	GravityChange(velocity);
@@ -132,6 +152,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		velocity.Set(0, 0);
 		canChangeDirection = true;
 		lastDirection = NONE;
+		currentAnimation = &right;
 		break;
 	default:
 		break;
