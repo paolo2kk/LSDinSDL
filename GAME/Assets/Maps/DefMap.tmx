@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="113">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="175">
  <tileset firstgid="1" name="world_tileset" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../../../../Desenvolupament/GAME/Assets/Maps/world_tileset.png" width="512" height="512"/>
   <tile id="182">
@@ -27108,7 +27108,7 @@
    <tile gid="13"/>
    <tile gid="14"/>
    <tile gid="2659"/>
-   <tile gid="2948"/>
+   <tile gid="29"/>
    <tile gid="29"/>
    <tile gid="29"/>
    <tile gid="29"/>
@@ -45079,6 +45079,65 @@
   <object id="91" x="1024" y="352" width="640" height="32"/>
   <object id="92" x="1216" y="640" width="704" height="32"/>
   <object id="94" x="1376" y="160" width="32" height="32"/>
+  <object id="113" x="1920" y="640" width="320" height="32"/>
+  <object id="114" x="1920" y="832" width="896" height="32"/>
+  <object id="115" x="2816" y="320" width="32" height="512"/>
+  <object id="116" x="2304" y="320" width="448" height="32"/>
+  <object id="117" x="2304" y="352" width="32" height="160"/>
+  <object id="118" x="2720" y="352" width="32" height="416"/>
+  <object id="119" x="2368" y="736" width="352" height="32"/>
+  <object id="120" x="2336" y="480" width="64" height="32"/>
+  <object id="121" x="2368" y="512" width="32" height="224"/>
+  <object id="123" x="2752" y="192" width="128" height="32"/>
+  <object id="124" x="2752" y="0" width="32" height="192"/>
+  <object id="126" x="1920" y="0" width="832" height="32"/>
+  <object id="127" x="1920" y="32" width="32" height="320"/>
+  <object id="128" x="1952" y="320" width="128" height="32"/>
+  <object id="129" x="2048" y="128" width="32" height="192"/>
+  <object id="130" x="2080" y="128" width="160" height="32"/>
+  <object id="131" x="2208" y="160" width="32" height="480"/>
+  <object id="132" x="1920" y="864" width="32" height="64"/>
+  <object id="133" x="2976" y="192" width="32" height="192"/>
+  <object id="134" x="3008" y="352" width="160" height="32"/>
+  <object id="135" x="3136" y="384" width="32" height="96"/>
+  <object id="136" x="3168" y="448" width="64" height="32"/>
+  <object id="137" x="3200" y="192" width="32" height="256"/>
+  <object id="138" x="3008" y="192" width="192" height="32"/>
+  <object id="139" x="3104" y="160" width="32" height="32"/>
+  <object id="140" x="3232" y="256" width="32" height="32"/>
+  <object id="141" x="3360" y="256" width="32" height="32"/>
+  <object id="142" x="3200" y="32" width="64" height="32"/>
+  <object id="143" x="3200" y="64" width="32" height="64"/>
+  <object id="144" x="3072" y="32" width="32" height="32"/>
+  <object id="145" x="2848" y="96" width="160" height="32"/>
+  <object id="146" x="2848" y="128" width="32" height="64"/>
+  <object id="147" x="2976" y="32" width="32" height="64"/>
+  <object id="148" x="3008" y="0" width="608" height="32"/>
+  <object id="149" x="3616" y="32" width="32" height="160"/>
+  <object id="150" x="3648" y="160" width="192" height="32"/>
+  <object id="151" x="3808" y="192" width="32" height="480"/>
+  <object id="152" x="3392" y="512" width="224" height="32"/>
+  <object id="153" x="3584" y="288" width="32" height="224"/>
+  <object id="154" x="3488" y="288" width="96" height="32"/>
+  <object id="155" x="3488" y="160" width="32" height="128"/>
+  <object id="156" x="3392" y="128" width="128" height="32"/>
+  <object id="157" x="3392" y="160" width="32" height="352"/>
+  <object id="158" x="2848" y="320" width="32" height="608"/>
+  <object id="159" x="2880" y="480" width="160" height="32"/>
+  <object id="160" x="3008" y="512" width="32" height="32"/>
+  <object id="161" x="2880" y="544" width="160" height="32"/>
+  <object id="162" x="2976" y="672" width="32" height="160"/>
+  <object id="163" x="3008" y="672" width="32" height="160"/>
+  <object id="164" x="2880" y="928" width="256" height="32"/>
+  <object id="165" x="3136" y="640" width="32" height="288"/>
+  <object id="166" x="3168" y="640" width="96" height="32"/>
+  <object id="167" x="3232" y="672" width="32" height="224"/>
+  <object id="168" x="3264" y="864" width="192" height="32"/>
+  <object id="169" x="3360" y="640" width="32" height="160"/>
+  <object id="170" x="3392" y="640" width="32" height="160"/>
+  <object id="171" x="3424" y="896" width="32" height="64"/>
+  <object id="172" x="3456" y="928" width="384" height="32"/>
+  <object id="173" x="3808" y="864" width="32" height="64"/>
  </objectgroup>
  <objectgroup id="12" name="CollisionLeft">
   <object id="95" x="96" y="896" width="32" height="32"/>
