@@ -31,7 +31,7 @@ in Linking, the Sapient Dream
 
 ## Game Controls
 ### Intro    
-### Player 1
+### Player
     * W -> Move up
     * A -> Move to the left
     * S -> Move down
