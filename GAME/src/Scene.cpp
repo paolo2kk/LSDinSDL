@@ -122,7 +122,8 @@ bool Scene::Update(float dt)
 
 	//aaa
 
-	// Actualizar y renderizar el fondo parallax
+	//haz que el parallax se 
+	
 
 	TriggerManagement();
 	SceneChange();

@@ -23,18 +23,24 @@ ParallaxLayer::ParallaxLayer(SDL_Texture* texture, int speed)
 
 // Renderiza una capa de parallax
 void ParallaxLayer::render(SDL_Renderer* renderer, int cameraX) {
-    int renderX = -(cameraX / speed) % width; // Calcula la posición de la textura
+    //haz que la textura se renderize en la posicion x del jugador 
+	//y en la posicion y de la camara
+	SDL_Rect destRect = { -cameraX * speed % width, 0, width, 600 };
+	SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 
-    SDL_Rect srcRect = { 0, 0, width, 480 }; // Ajustar según el tamaño de la capa
-    SDL_Rect destRect = { renderX, 0, width, 480 };
+	// Si la textura se sale por la izquierda, renderizamos otra copia
+	if (destRect.x < 0) {
+		destRect.x += width;
+		SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+	}
 
-    SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
+	// Si la textura se sale por la derecha, renderizamos otra copia
+	if (destRect.x + destRect.w < 800) {
+		destRect.x -= width;
+		SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+	}
 
-    // Si el fondo no llena la pantalla, renderizamos una segunda vez
-    if (renderX + width < 800) {
-        destRect.x = renderX + width;
-        SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
-    }
+
 }
 
 // Constructor de ParallaxBackground
