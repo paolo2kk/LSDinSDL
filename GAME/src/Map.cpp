@@ -28,13 +28,77 @@ bool Map::Awake()
 }
 
 bool Map::Start() {
-
-    return true;
+    
+    return true;   
 }
 
 bool Map::Update(float dt)
 {
     bool ret = true;
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -Engine::GetInstance().render.get()->camera.x * 0.4, -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, Engine::GetInstance().render.get()->camera.x * (backgroundvelocityX + 0.01), -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+    Engine::GetInstance().render.get()->DrawTexture(Background3, Engine::GetInstance().render.get()->camera.x * (backgroundvelocityX + 0.03), -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+
+    BG1OffsetX += BG1Speed * dt;
+    BG2OffsetX += BG2Speed * dt;
+    BG3OffsetX += BG3Speed * dt;
+    BG4OffsetX += BG4Speed * dt;
+
+    if (BG1OffsetX >= 960) BG1OffsetX -= 960;
+    if (BG2OffsetX >= 960) BG2OffsetX -= 960;
+    if (BG3OffsetX >= 960) BG3OffsetX -= 960;
+    if (BG4OffsetX >= 960) BG4OffsetX -= 960;
+
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 2, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 2, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 3, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 3, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 4, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 4, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 5, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 5, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 6, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 6, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 7, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 7, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 8, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 8, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 9, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 9, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 10, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 10, 0);
 
     if (mapLoaded) {
 
@@ -112,7 +176,9 @@ bool Map::CleanUp()
 bool Map::Load(std::string path, std::string fileName)
 {
     bool ret = false;
-
+    Background1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
+    Background2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer2.png");
+    Background3 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
     // Assigns the name of the map file and the path
     mapFileName = fileName;
     mapPath = path;

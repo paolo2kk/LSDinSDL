@@ -63,6 +63,15 @@ bool Scene::Start()
 	// Posicionar al jugador y objetos
 	player->position = Vector2D(160, 832);
 	playerps1 = Vector2D(160, 910);
+	parallax.setPlayer(player);
+
+	SDL_Texture* bgTexture1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
+	SDL_Texture* bgTexture2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer2.png");
+	if (!bgTexture1 || !bgTexture2) {
+		LOG("Failed to load textures for parallax layers!");
+	}
+	parallax.addLayer(bgTexture1, 5);
+	parallax.addLayer(bgTexture2, 10);
 
 	enemy_LVL2->position = Vector2D(1100, 585);
 	enemy_LVL2->stage = 2;
@@ -85,7 +94,7 @@ bool Scene::Update(float dt)
 {
 		cameraX = player->position.getX() - 400;  	float camSpeed = 1;
 	
-
+		parallax.setPlayerPosition(player->position.getX());
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
@@ -119,7 +128,7 @@ bool Scene::Update(float dt)
 	{
 		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250, 250, NULL, 0.0f);
 	}
-
+	parallax.updateAndRender();
 	//aaa
 
 	// Actualizar y renderizar el fondo parallax

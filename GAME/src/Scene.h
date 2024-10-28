@@ -61,7 +61,7 @@ private:
 	Vector2D playerps1;
 
 	Enemy* enemy_LVL2;
-
+	ParallaxBackground parallax; 
 	int windowSizeX = 960;
 	//LVL1
 	Box* box1_LVL1;

@@ -131,5 +131,18 @@ private:
     bool mapLoaded;
     // L06: DONE 1: Declare a variable data of the struct MapData
     MapData mapData;
-   
+    SDL_Texture* Background1;
+    SDL_Texture* Background2;
+    SDL_Texture* Background3;
+    float BG1OffsetX = 0.0f;
+    float BG2OffsetX = 0.0f;
+    float BG3OffsetX = 0.0f;
+    float BG4OffsetX = 0.0f;
+
+    float BG1Speed = 0.01f;
+    float BG2Speed = 0.02f;
+    float BG3Speed = 0.03f;
+    float BG4Speed = 0.04f;
+    float backgroundvelocityX = -.05;
+    float backgroundvelocityY= .07;
 };
