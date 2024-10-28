@@ -6,7 +6,7 @@ Marc Amo Mateu - Link to GitHub: https://github.com/mxarc
 
 Pau González Cayuela - Link to GitHub: https://github.com/paolo2kk
 
-Victor Cardenas Hormigo - Link to GitHub: https://github.com/
+Victor Cardenas Hormigo - Link to GitHub: https://github.com/vixtorbir
 
 ## Description
 
