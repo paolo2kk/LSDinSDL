@@ -163,10 +163,19 @@ void Scene::SetLevel(int stage)
 			player->SetAnimation(Direction::RIGHT);
 		case 4:
 			player->SetPosition(Vector2D(2900, 260));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
 		case 5:
 			player->SetPosition(Vector2D(3900, 835));;
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
 		case 6:
 			player->SetPosition(Vector2D(4810, 120));
+			player->velocity.Set(0, 0);
+			player->lastDirection = NONE;
+			player->SetAnimation(Direction::RIGHT);
 		}
 		isSceneSetted = true;
 		
@@ -176,28 +185,20 @@ void Scene::SetLevel(int stage)
 
 void Scene::SceneChange()
 {
-
-	for (int i = 1; i <= totalStages; ++i) {
-		if (stage == i) {
-			SetLevel(stage);
-
-			if (player->position.getX() >= windowSizeX * i && stage < totalStages) {
+			if (player->position.getX() >= windowSizeX * stage && stage <= totalStages) {
 				stage++;
 				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
 				isSceneSetted = false;
 				SetLevel(stage); 
 			}
 
-			else if (player->position.getX() < windowSizeX * (i - 1) && stage > 1) {
+			else if (player->position.getX() < windowSizeX * stage && stage > 1) {
 				stage--;
 				Engine::GetInstance().render.get()->camera.x = -windowSizeX * (stage - 1);
 				isSceneSetted = false;
 				SetLevel(stage); 
 			}
 
-			break; 
-		}
-	}
 
 	//entity stage management
 	for (Entity* entity : Engine::GetInstance().entityManager.get()->entities) {
