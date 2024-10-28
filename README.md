@@ -13,10 +13,15 @@ Victor Cardenas Hormigo - Link to GitHub: https://github.com/vixtorbir
 SDLSD is a puzzle game where players control a capibara. The objective is simple, players have to find the way to pass the different levels of the game by using the brain.
 
 in Life, the Sensuous Dream
+
 in Limbo, the Silent Dream
+
 in Lunacy, the Savage Dream
+
 in Laughter, the Spiritual Dream
+
 in Leisure, the Sonorous Dream
+
 in Linking, the Sapient Dream
 
 ## Installation
