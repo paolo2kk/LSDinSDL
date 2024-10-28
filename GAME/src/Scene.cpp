@@ -271,7 +271,7 @@ void Scene::SceneChange()
 
 		
 	}
-	if (player->position.getY() > 1400)
+	if (player->position.getY() > 1400 ||player->position.getY() < 0)
 	{
 		isSceneSetted = false;
 		SetLevel(stage);
