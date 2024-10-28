@@ -120,10 +120,86 @@ bool Scene::Update(float dt)
 		Engine::GetInstance().render.get()->DrawTexture(Engine::GetInstance().textures.get()->Load("Assets/Textures/help.png"), 250, 250, NULL, 0.0f);
 	}
 
-	//aaa
-
-	//haz que el parallax se 
 	
+
+	
+	
+	//haz que dependiendo de la tecla numerica que pulses se cambie la escena del 1-10
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		stage = 1;
+		isSceneSetted = false;
+		SetLevel(1);
+		Engine::GetInstance().render.get()->camera.x = (stage-1) * 960;
+		
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		stage = 2;
+		isSceneSetted = false;
+		SetLevel(2);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+		
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		stage = 3;
+		isSceneSetted = false;
+		SetLevel(3);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	{
+		stage = 4;
+		isSceneSetted = false;
+		SetLevel(4);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	{
+		stage = 5;
+		isSceneSetted = false;
+		SetLevel(5);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	{
+		stage = 6;
+		isSceneSetted = false;
+		SetLevel(6);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+	{
+		stage = 7;
+		isSceneSetted = false;
+		SetLevel(7);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	{
+		stage = 8;
+		isSceneSetted = false;
+		SetLevel(8);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	{
+		stage = 9;
+		isSceneSetted = false;
+		SetLevel(9);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		stage = 10;
+		isSceneSetted = false;
+		SetLevel(10);
+		Engine::GetInstance().render.get()->camera.x = (stage - 1) * -960;
+	}
+
 
 	TriggerManagement();
 	SceneChange();
