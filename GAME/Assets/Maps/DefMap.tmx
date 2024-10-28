@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="396">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="300" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="398">
  <tileset firstgid="1" name="world_tileset" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="../../../../Desenvolupament/GAME/Assets/Maps/world_tileset.png" width="512" height="512"/>
   <tile id="182">
@@ -18302,7 +18302,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18602,9 +18602,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -18902,9 +18902,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19202,9 +19202,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19485,6 +19485,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19501,11 +19502,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -19785,7 +19785,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20085,7 +20085,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20385,14 +20385,14 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20685,14 +20685,14 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20985,7 +20985,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21285,14 +21285,14 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21589,10 +21589,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21889,10 +21889,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -22189,12 +22189,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -22489,12 +22489,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -23104,9 +23104,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -23404,7 +23404,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -23704,7 +23704,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24002,9 +24002,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -26702,7 +26702,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -27002,13 +27002,13 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
+   <tile gid="13"/>
    <tile/>
    <tile/>
    <tile/>
@@ -54320,10 +54320,6 @@
   <object id="354" x="8512" y="224" width="128" height="32"/>
   <object id="355" x="8608" y="256" width="32" height="512"/>
   <object id="356" x="8224" y="224" width="32" height="224"/>
-  <object id="357" x="8352" y="224" width="96" height="32"/>
-  <object id="358" x="8352" y="256" width="32" height="64"/>
-  <object id="359" x="8416" y="256" width="32" height="64"/>
-  <object id="360" x="8384" y="288" width="32" height="32"/>
   <object id="361" x="8512" y="288" width="32" height="128"/>
   <object id="363" x="8544" y="288" width="32" height="128"/>
   <object id="364" x="8512" y="736" width="96" height="32"/>
@@ -54354,6 +54350,7 @@
   <object id="393" x="5728" y="352" width="32" height="96"/>
   <object id="394" x="5760" y="352" width="32" height="96"/>
   <object id="395" x="5696" y="640" width="32" height="64"/>
+  <object id="397" x="8352" y="224" width="96" height="96"/>
  </objectgroup>
  <objectgroup id="12" name="CollisionLeft">
   <object id="95" x="96" y="896" width="32" height="32"/>
