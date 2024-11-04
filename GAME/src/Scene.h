@@ -29,6 +29,8 @@ public:
 	// Called before render is available
 	bool Awake();
 
+	Vector2D GetPlayerPosition();
+
 	// Called before the first frame
 	bool Start();
 

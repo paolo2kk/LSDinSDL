@@ -14,6 +14,8 @@ public:
     float getY() const;
     void setY(float y);
 
+    bool operator==(const Vector2D& other) const;
+
     // Vector operations
     float magnitude() const;
     Vector2D normalized() const;

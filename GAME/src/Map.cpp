@@ -135,7 +135,24 @@ bool Map::Update(float dt)
 
     return ret;
 }
+Vector2D Map::WorldToMap(int x, int y) {
 
+    Vector2D ret(0, 0);
+
+    if (mapData.orientation == MapOrientation::ORTOGRAPHIC) {
+        ret.setX(x / mapData.tileWidth);
+        ret.setY(y / mapData.tileHeight);
+    }
+
+    if (mapData.orientation == MapOrientation::ISOMETRIC) {
+        float half_width = mapData.tileWidth / 2;
+        float half_height = mapData.tileHeight / 2;
+        ret.setX(int((x / half_width + y / half_height) / 2));
+        ret.setY(int((y / half_height - (x / half_width)) / 2));
+    }
+
+    return ret;
+}
 // L09: TODO 2: Implement function to the Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
@@ -284,6 +301,7 @@ bool Map::Load(std::string path, std::string fileName)
                 platform->ctype = colliderType;
             }
         }
+        
         // L08 TODO 3: Create colliders
         // L08 TODO 7: Assign collider type
         // Later you can create a function here to load and create the colliders from the map
@@ -353,7 +371,15 @@ bool Map::Load(std::string path, std::string fileName)
     mapLoaded = ret;
     return ret;
 }
-
+MapLayer* Map::GetNavigationLayer() {
+    for (const auto& layer : mapData.layers) {
+        if (layer->properties.GetProperty("Navigation") != NULL &&
+            layer->properties.GetProperty("Navigation")->value) {
+            return layer;
+        }
+    }
+    return nullptr;
+}
 // L07: TODO 8: Create a method that translates x,y coordinates from map positions to world positions
 Vector2D Map::MapToWorld(int x, int y) const
 {

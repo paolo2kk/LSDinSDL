@@ -21,6 +21,9 @@ void Vector2D::setY(float y) {
     this->y = y;
 }
 
+bool Vector2D::operator==(const Vector2D& other) const {
+    return x == other.x && y == other.y;
+}
 // Vector operations
 float Vector2D::magnitude() const {
     return std::sqrt(x * x + y * y);

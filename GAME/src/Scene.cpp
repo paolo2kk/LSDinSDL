@@ -9,7 +9,7 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "ParallaxBackground.h"  
-
+#include "EnemyInClass.h"
 
 Scene::Scene() : Module()
 {
@@ -36,7 +36,11 @@ bool Scene::Awake()
 	//enemies
 	enemy_LVL2 = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
 	enemy_LVL2->SetParameters(configParameters.child("entities").child("enemy"));
-	
+	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		EnemyInClass* enemy = (EnemyInClass*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMYBFS);
+		enemy->SetParameters(enemyNode);
+	}
 	// Crear un nuevo item usando el entity manager
 
 	// Triggers y puertas
@@ -53,7 +57,10 @@ bool Scene::Awake()
 
 	return ret;
 }
-
+Vector2D Scene::GetPlayerPosition()
+{
+	return player->position;
+}
 // Called before the first frame
 bool Scene::Start()
 {

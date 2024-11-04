@@ -14,6 +14,7 @@ enum class EntityType
 	MOVING_PLATFORMR,
 	MOVING_PLATFORML,
 	ENEMY,
+	ENEMYBFS,
 	UNKNOWN
 };
 

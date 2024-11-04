@@ -10,6 +10,7 @@
 #include "Particle.h"
 #include "MovingPlatform.h"
 #include "Enemy.h"
+#include "EnemyInClass.h"
 
 EntityManager::EntityManager() : Module()
 {
@@ -101,7 +102,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
-
+	case EntityType::ENEMYBFS:
+		entity = new EnemyInClass();
+		break;
 	default:
 		break;
 	}

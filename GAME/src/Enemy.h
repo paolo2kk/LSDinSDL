@@ -1,4 +1,3 @@
-// Enemy.h
 
 #pragma once
 
@@ -21,7 +20,7 @@ public:
     void GravityChange(b2Vec2& velocity);
     bool Update(float dt);
     bool CleanUp();
-    
+
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
     void SetParameters(pugi::xml_node parameters) {
@@ -32,7 +31,7 @@ public:
         pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(newPosition.getX()), PIXEL_TO_METERS(newPosition.getY())), 0);
     }
 public:
-    
+
     pugi::xml_node parameters;
 
     // Enemy parameters
