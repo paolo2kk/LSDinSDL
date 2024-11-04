@@ -8,7 +8,7 @@
 #include "Log.h"
 #include "Physics.h"
 #include "Map.h"
-EnemyInClass::EnemyInClass() : Entity(EntityType::ENEMY)
+EnemyInClass::EnemyInClass() : Entity(EntityType::ENEMYBFS)
 {
 }
 EnemyInClass::~EnemyInClass() {
@@ -31,7 +31,7 @@ bool EnemyInClass::Start() {
 	//Add a physics to an item - initialize the physics body
 	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2, texH / 2, bodyType::DYNAMIC);
 	//Assign collider type
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::ENEMYBFS;
 	// Set the gravity of the body
 	if (!parameters.attribute("gravity").as_bool()) pbody->body->SetGravityScale(0);
 	// Initialize pathfinding
@@ -44,15 +44,15 @@ bool EnemyInClass::Start() {
 bool EnemyInClass::Update(float dt)
 {
 	// Pathfinding testing inputs
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 		Vector2D pos = GetPosition();
 		Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(), pos.getY());
 		pathfinding->ResetPath(tilePos);
 	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
 		pathfinding->PropagateBFS();
 	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_J) == KEY_REPEAT &&
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT &&
 		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
 		pathfinding->PropagateBFS();
 	}
