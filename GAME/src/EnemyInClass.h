@@ -4,11 +4,11 @@
 #include "Animation.h"
 #include "Pathfinding.h"
 struct SDL_Texture;
-class Enemy : public Entity
+class EnemyInClass : public Entity
 {
 public:
-	Enemy();
-	virtual ~Enemy();
+	EnemyInClass();
+	virtual ~EnemyInClass();
 	bool Awake();
 	bool Start();
 	bool Update(float dt);

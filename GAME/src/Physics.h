@@ -35,7 +35,8 @@ enum class ColliderType {
 	DOWN,
 	LEFT,
 	ENEMY,
-	RIGHT
+	RIGHT,
+	ENEMYBFS,
 	// ..
 };
 
