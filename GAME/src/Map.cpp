@@ -135,7 +135,24 @@ bool Map::Update(float dt)
 
     return ret;
 }
+Vector2D Map::WorldToMap(int x, int y) {
 
+    Vector2D ret(0, 0);
+
+    if (mapData.orientation == MapOrientation::ORTOGRAPHIC) {
+        ret.setX(x / mapData.tileWidth);
+        ret.setY(y / mapData.tileHeight);
+    }
+
+    if (mapData.orientation == MapOrientation::ISOMETRIC) {
+        float half_width = mapData.tileWidth / 2;
+        float half_height = mapData.tileHeight / 2;
+        ret.setX(int((x / half_width + y / half_height) / 2));
+        ret.setY(int((y / half_height - (x / half_width)) / 2));
+    }
+
+    return ret;
+}
 // L09: TODO 2: Implement function to the Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {

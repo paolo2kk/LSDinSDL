@@ -34,11 +34,9 @@ public:
 
 	void SetAnimation(Direction dir);
 
-	void SetPosition(Vector2D pos) {
-		pos.setX(pos.getX() + texW / 2);
-		pos.setY(pos.getY() + texH / 2);
-		b2Vec2 bodyPos = b2Vec2(PIXEL_TO_METERS(pos.getX()), PIXEL_TO_METERS(pos.getY()));
-		pbody->body->SetTransform(bodyPos, 0);
+	void SetPosition(Vector2D newPosition) {
+		position = newPosition;
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(newPosition.getX()), PIXEL_TO_METERS(newPosition.getY())), 0);
 	}
 	// L08 TODO 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);

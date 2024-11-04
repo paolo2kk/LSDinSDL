@@ -4,6 +4,12 @@
 #include <list>
 #include <vector>
 
+
+enum MapOrientation
+{
+    ORTOGRAPHIC = 0,
+    ISOMETRIC
+};
 // L09: TODO 5: Add attributes to the property structure
 struct Properties
 {
@@ -85,7 +91,7 @@ struct MapData
 	int tileWidth;
 	int tileHeight;
     std::list<TileSet*> tilesets;
-
+    MapOrientation orientation;
     // L07: TODO 2: Add the info to the MapLayer Struct
     std::list<MapLayer*> layers;
 };
@@ -107,6 +113,8 @@ public:
 
     // Called each loop iteration
     bool Update(float dt);
+
+    Vector2D WorldToMap(int x, int y);
 
     // Called before quitting
     bool CleanUp();
@@ -137,7 +145,6 @@ public:
         return mapData.tileHeight;
     }
 
-}
 public: 
     std::string mapFileName;
     std::string mapPath;
