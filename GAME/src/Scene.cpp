@@ -122,7 +122,7 @@ bool Scene::Update(float dt)
 
 	
 
-	
+
 	
 	//haz que dependiendo de la tecla numerica que pulses se cambie la escena del 1-10
 
