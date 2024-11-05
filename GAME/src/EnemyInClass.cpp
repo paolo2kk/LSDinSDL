@@ -25,7 +25,7 @@ bool EnemyInClass::Start() {
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
 	//Load animations
-	idle.LoadAnimations(parameters.child("animations").child("idle"));
+	idle.LoadAnimations(parameters.child("animations").child("left"));
 	currentAnimation = &idle;
 
 	//Add a physics to an item - initialize the physics body
