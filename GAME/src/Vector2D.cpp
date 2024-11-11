@@ -24,6 +24,16 @@ void Vector2D::setY(float y) {
 bool Vector2D::operator==(const Vector2D& other) const {
     return x == other.x && y == other.y;
 }
+
+bool Vector2D::operator!=(const Vector2D& other) const {
+    return x != other.x || y != other.y;
+}
+bool Vector2D::operator<(const Vector2D& other) const {
+    if (x != other.x) {
+        return x < other.x;
+    }
+    return y < other.y;
+}
 // Vector operations
 float Vector2D::magnitude() const {
     return std::sqrt(x * x + y * y);

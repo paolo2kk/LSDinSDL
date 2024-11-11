@@ -97,6 +97,7 @@ bool Enemy::Update(float dt)
 
     }
 
+
       /*  if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
             velocity.x = 0.2 * dt;
         }

@@ -6,6 +6,7 @@
 #include "Physics.h"
 #include "PerfTimer.h"  // Include the PerfTimer header
 #include "Animation.h"
+#include "Pathfinding.h"
 
 struct SDL_Texture;
 
@@ -58,4 +59,6 @@ public:
     bool canExecuteGrav = true;
 
     PerfTimer perfTimer;
+
+
 };
