@@ -111,6 +111,8 @@ bool Enemy::Update(float dt)
             velocity.y = 0.2 * dt;
         }
    */
+
+    
     
     pbody->body->SetLinearVelocity(velocity);
 

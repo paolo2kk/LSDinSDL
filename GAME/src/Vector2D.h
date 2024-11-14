@@ -28,6 +28,10 @@ public:
     // Output stream operator
     friend std::ostream& operator<<(std::ostream& os, const Vector2D& vec);
 
+    // Calculate distance
+    float distanceMahattan(const Vector2D& other) const;
+    float distanceEuclidean(const Vector2D& other) const;
+    float distanceSquared(const Vector2D& other) const;
 private:
     float x;
     float y;

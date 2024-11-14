@@ -97,8 +97,8 @@ bool Scene::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
+	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
+		Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);*/
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
 		Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
