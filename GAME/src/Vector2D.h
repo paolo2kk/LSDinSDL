@@ -32,6 +32,7 @@ public:
     float distanceMahattan(const Vector2D& other) const;
     float distanceEuclidean(const Vector2D& other) const;
     float distanceSquared(const Vector2D& other) const;
+
 private:
     float x;
     float y;

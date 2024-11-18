@@ -78,3 +78,6 @@ float Vector2D::distanceEuclidean(const Vector2D& other) const {
 float Vector2D::distanceSquared(const Vector2D& other) const {
     return std::pow(x - other.x, 2) + std::pow(y - other.y, 2);
 }
+
+
+
