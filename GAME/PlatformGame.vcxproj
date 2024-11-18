@@ -157,6 +157,7 @@
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\MovingPlatform.cpp" />
+    <ClCompile Include="src\Murcielago.cpp" />
     <ClCompile Include="src\ParallaxBackground.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Pathfinding.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\MovingPlatform.h" />
+    <ClInclude Include="src\Murcielago.h" />
     <ClInclude Include="src\ParallaxBackground.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Pathfinding.h" />
