@@ -205,5 +205,8 @@
     <Xml Include="config.xml">
       <Filter>Configuration FIles</Filter>
     </Xml>
+    <Xml Include="stages.xml">
+      <Filter>Configuration FIles</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

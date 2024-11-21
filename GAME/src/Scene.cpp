@@ -240,8 +240,7 @@ void Scene::LoadState() {
 
 	isSceneSetted = false;
 	stage = sceneIndex;
-	Engine::GetInstance().render.get()->camera.x = (stage - 1) * -windowSizeX;
-}
+    Engine::GetInstance().render.get()->camera.x = (stage - 1) * -windowSizeX; }
 void Scene::SaveState() {
 
 	sceneIndex = stage;

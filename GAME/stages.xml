@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Stages>
+	<Stage id="1">
+		<Player x="160" y="832" direction="RIGHT"/>
+		<Enemies>
+			<Enemy x="1000" y="500"/>
+		</Enemies>
+		<Platforms>
+			<Platform x="704" y="910"/>
+		</Platforms>
+	</Stage>
+
+	<Stage id="2">
+		<Player x="1080" y="250" direction="RIGHT"/>
+		<Enemies>
+			<Enemy x="1100" y="585"/>
+			<Enemy x="1200" y="600"/>
+		</Enemies>
+		<Platforms>
+			<Platform x="1200" y="835"/>
+		</Platforms>
+	</Stage>
+
+	<Stage id="3">
+		<Player x="2000" y="750" direction="LEFT"/>
+		<Enemies>
+			<Enemy x="2100" y="800"/>
+		</Enemies>
+	</Stage>
+</Stages>
