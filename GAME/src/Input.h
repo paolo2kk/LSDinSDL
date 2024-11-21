@@ -24,27 +24,22 @@ enum KeyState
 
 class Input : public Module
 {
-
 public:
 
 	Input();
 
-	// Destructor
 	virtual ~Input();
 
-	// Called before render is available
 	bool Awake();
 
-	// Called before the first frame
+	SDL_GameController* FindController();
+
 	bool Start();
 
-	// Called each loop iteration
 	bool PreUpdate();
 
-	// Called before quitting
 	bool CleanUp();
 
-	// Check key states (includes mouse and joy buttons)
 	KeyState GetKey(int id) const
 	{
 		return keyboard[id];
@@ -55,19 +50,25 @@ public:
 		return mouseButtons[id - 1];
 	}
 
-	// Check if a certain window event happened
+	KeyState GetControllerButton(SDL_GameControllerButton button);
+
+	Sint16 GetControllerAxis(SDL_GameControllerAxis axis);
+
 	bool GetWindowEvent(EventWindow ev);
 
-	// Get mouse / axis position
-	void GetMousePosition(int &x, int &y);
+	void GetMousePosition(int& x, int& y);
 	void GetMouseMotion(int& x, int& y);
 
 private:
-	bool windowEvents[WE_COUNT];
-	KeyState*	keyboard;
-	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
-	int	mouseMotionX;
+	bool windowEvents[WE_COUNT]; 
+	KeyState* keyboard;          
+	KeyState mouseButtons[NUM_MOUSE_BUTTONS]; 
+	int mouseMotionX;
 	int mouseMotionY;
-	int mouseX;
-	int mouseY;
+	int mouseX;      
+	int mouseY;      
+
+	SDL_GameController* controller;                
+	KeyState controllerButtons[SDL_CONTROLLER_BUTTON_MAX];
+	Sint16 controllerAxes[SDL_CONTROLLER_AXIS_MAX];    
 };

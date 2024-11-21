@@ -56,23 +56,27 @@ void Player::GravityChange(b2Vec2& velocity)
 	auto input = Engine::GetInstance().input.get();
 
 	// Cambia la dirección sin restricciones complejas
-	if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+	if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(11))) {
 		velocity = b2Vec2(0, GRAVITY_Y);
+		
 		currentAnimation = &up;
 		lastDirection = UP;
 	}
-	else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(12))) {
 		velocity = b2Vec2(0, -GRAVITY_Y);
+
 		currentAnimation = &down;
 		lastDirection = DOWN;
 	}
-	else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(13))) {
 		velocity = b2Vec2(GRAVITY_Y, 0);
+		
 		currentAnimation = &left;
 		lastDirection = LEFT;
 	}
-	else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(14))) {
 		velocity = b2Vec2(-GRAVITY_Y, 0);
+		
 		currentAnimation = &right;
 		lastDirection = RIGHT;
 	}
