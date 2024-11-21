@@ -10,6 +10,7 @@
 #include "EntityManager.h"
 #include "ParallaxBackground.h"  
 #include "EnemyInClass.h"
+#include "Map.h"
 
 Scene::Scene() : Module()
 {
@@ -235,11 +236,19 @@ void Scene::TriggerManagement()
 		doneLVL1 = true;
 	}
 }
+void Scene::LoadState() {
 
+	isSceneSetted = false;
+	stage = sceneIndex;
+	Engine::GetInstance().render.get()->camera.x = (stage - 1) * -windowSizeX;
+}
+void Scene::SaveState() {
+
+	sceneIndex = stage;
+
+}
 void Scene::SetLevel(int stage) {
-	// Only proceed if the scene is not already set
 	if (!isSceneSetted) {
-		// Set player position, animation, and reset other elements based on the current stage
 		switch (stage) {
 		case 1:
 			player->SetPosition(playerps1);
@@ -312,8 +321,7 @@ void Scene::SetLevel(int stage) {
 			break;
 		}
 
-		// Mark the scene as set to avoid multiple calls
-		isSceneSetted = true;
+ 		isSceneSetted = true;
 	}
 }
 
@@ -369,7 +377,12 @@ bool Scene::PostUpdate()
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
+	
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		LoadState();
 
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		SaveState();
 	return ret;
 }
 

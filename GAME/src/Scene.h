@@ -42,6 +42,10 @@ public:
 
 	void TriggerManagement();
 
+	void LoadState();
+
+	void SaveState();
+
 	void SetLevel(int stage);
 
 
@@ -55,6 +59,7 @@ public:
 
 public:
 	int stage = 1;
+	int sceneIndex = 1;
 
 private:
 	SDL_Texture* img;
