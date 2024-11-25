@@ -43,52 +43,41 @@ bool EnemyInClass::Start() {
 }
 bool EnemyInClass::Update(float dt)
 {
-	// Pathfinding testing inputs
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+	b2Vec2 velocity = b2Vec2(0, 0);
+	if (buscando <= 80)
+	{
+		pathfinding->PropagateAStar(EUCLIDEAN);
+		buscando++;
+	}
+	else
+	{
 		Vector2D pos = GetPosition();
 		Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(), pos.getY());
 		pathfinding->ResetPath(tilePos);
-	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Z) == KEY_DOWN) {
-		pathfinding->PropagateBFS();
-	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateBFS();
-	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_K) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateDijkstra();
+		buscando = 0;
 	}
 
-	//A* Manhattan
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_DOWN) {
-		pathfinding->PropagateAStar(MANHATTAN);
-	}
+	Vector2D PosInMap = Engine::GetInstance().map->WorldToMap(position.getX(), position.getY());
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(MANHATTAN);
+	//if pathfinding is done, move the next tile, make it slower
+	if (pathfinding->pathTiles.size() > 0)
+	{
+		Vector2D nextTile = pathfinding->pathTiles.front();
+		Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
+		Vector2D dir = nextPos - position;
+		dir.normalized();
+		velocity = b2Vec2(dir.getX(), dir.getY());
+		pbody->body->SetLinearVelocity(velocity);
+		if (dir.getX() > 0) {
+			stat = States::WALKING_R;
+		}
+		else {
+			stat = States::WALKING_L;
+		}
 	}
-
-	// Euclidien
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	// Squared
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		pathfinding->PropagateAStar(SQUARED);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(SQUARED);
+	else {
+		pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+		stat = States::IDLE;
 	}
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
 	b2Transform pbodyPos = pbody->body->GetTransform();
@@ -114,4 +103,9 @@ Vector2D EnemyInClass::GetPosition() {
 	b2Vec2 bodyPos = pbody->body->GetTransform().p;
 	Vector2D pos = Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
 	return pos;
+}
+void EnemyInClass::ResetPath() {
+	Vector2D pos = GetPosition();
+	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(pos.getX(), pos.getY());
+	pathfinding->ResetPath(tilePos);
 }

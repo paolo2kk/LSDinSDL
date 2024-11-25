@@ -7,10 +7,10 @@
 #include "Log.h"
 
 Pathfinding::Pathfinding() {
-    
-     //Loads texture to draw the path
+
+    //Loads texture to draw the path
     pathTex = Engine::GetInstance().textures.get()->Load("Assets/Maps/MapMetadata.png");
-    tileX = Engine::GetInstance().textures.get()->Load("Assets/Textures/Enemy.png");
+    tileX = Engine::GetInstance().textures.get()->Load("Assets/Maps/x.png");
     map = Engine::GetInstance().map.get();
     layerNav = map->GetNavigationLayer();
 
@@ -25,7 +25,7 @@ Pathfinding::~Pathfinding() {
 // L11: BFS Pathfinding methods
 void Pathfinding::ResetPath(Vector2D pos) {
 
-    // Clear the queue
+    // Clear the frontier queue
     while (!frontier.empty()) {
         frontier.pop();
     }
@@ -35,21 +35,25 @@ void Pathfinding::ResetPath(Vector2D pos) {
         frontierDijkstra.pop();
     }
 
-    //Clear the visited list
-    visited.clear();
+    // Clear the frontierAStar queue
+    while (!frontierAStar.empty()) {
+        frontierAStar.pop();
+    }
+
+    visited.clear(); //Clear the visited list
     breadcrumbs.clear(); //Clear the breadcrumbs list
     pathTiles.clear(); //Clear the pathTiles list
 
-
-    frontier.push(pos);
-    frontierDijkstra.push(std::make_pair(0, pos));
+    // Inserts the first position in the queue and visited list
+    frontier.push(pos); //BFS
+    frontierDijkstra.push(std::make_pair(0, pos)); //Dijkstra
     frontierAStar.push(std::make_pair(0, pos)); //AStar
     visited.push_back(pos);
     breadcrumbs.push_back(pos);
 
     //reset the costSoFar matrix
     costSoFar = std::vector<std::vector<int>>(map->GetWidth(), std::vector<int>(map->GetHeight(), 0));
-    
+
 }
 
 void Pathfinding::DrawPath() {
@@ -58,13 +62,13 @@ void Pathfinding::DrawPath() {
 
     // Draw visited
     for (const auto& pathTile : visited) {
-    	Vector2D pathTileWorld = Engine::GetInstance().map.get()->MapToWorld(pathTile.getX(), pathTile.getY());
+        Vector2D pathTileWorld = Engine::GetInstance().map.get()->MapToWorld(pathTile.getX(), pathTile.getY());
         SDL_Rect rect = { 32,0,32,32 };
-        Engine::GetInstance().render.get()->DrawTexture(pathTex, pathTileWorld.getX(), pathTileWorld.getY(),&rect);
+        Engine::GetInstance().render.get()->DrawTexture(pathTex, pathTileWorld.getX(), pathTileWorld.getY(), &rect);
     }
 
-    // Draw frontier
-    
+    // ---------------- Draw frontier BFS
+
     // Create a copy of the queue to iterate over
     std::queue<Vector2D> frontierCopy = frontier;
 
@@ -81,9 +85,10 @@ void Pathfinding::DrawPath() {
         //Remove the front element from the queue
         frontierCopy.pop();
     }
-    // Draw frontierDijsktra
 
-   // Create a copy of the queue to iterate over
+    // ---------------- Draw frontierDijsktra
+
+    // Create a copy of the queue to iterate over
     std::priority_queue<std::pair<int, Vector2D>, std::vector<std::pair<int, Vector2D>>, std::greater<std::pair<int, Vector2D>> > frontierDijkstraCopy = frontierDijkstra;
 
     // Iterate over the elements of the frontier copy
@@ -100,11 +105,32 @@ void Pathfinding::DrawPath() {
         frontierDijkstraCopy.pop();
     }
 
+    // ---------------- Draw frontier AStar
+
+    // Create a copy of the queue to iterate over
+    std::priority_queue<std::pair<int, Vector2D>, std::vector<std::pair<int, Vector2D>>, std::greater<std::pair<int, Vector2D>> > frontierAStarCopy = frontierAStar;
+
+    // Iterate over the elements of the frontier copy
+    while (!frontierAStarCopy.empty()) {
+
+        //Get the first element of the queue
+        Vector2D frontierTile = frontierAStarCopy.top().second;
+        //Get the position of the frontier tile in the world
+        Vector2D pos = Engine::GetInstance().map.get()->MapToWorld(frontierTile.getX(), frontierTile.getY());
+        //Draw the frontier tile
+        SDL_Rect rect = { 0,0,32,32 };
+        Engine::GetInstance().render.get()->DrawTexture(pathTex, pos.getX(), pos.getY(), &rect);
+        //Remove the front element from the queue
+        frontierAStarCopy.pop();
+    }
+
+
     // Draw path
     for (const auto& pathTile : pathTiles) {
         Vector2D pathTileWorld = map->MapToWorld(pathTile.getX(), pathTile.getY());
         Engine::GetInstance().render.get()->DrawTexture(tileX, pathTileWorld.getX(), pathTileWorld.getY());
     }
+
 }
 
 bool Pathfinding::IsWalkable(int x, int y) {
@@ -138,6 +164,9 @@ void Pathfinding::PropagateBFS() {
 
         if (frontierTile == playerPosTile) {
             foundDestination = true;
+
+            // L12: TODO 2: When the destination is reach, call the function ComputePath
+            ComputePath(frontierTile.getX(), frontierTile.getY());
         }
     }
 
@@ -148,7 +177,7 @@ void Pathfinding::PropagateBFS() {
         Vector2D frontierTile = frontier.front();
         //remove the first element from the queue
         frontier.pop();
-        
+
         std::list<Vector2D> neighbors;
         if (IsWalkable(frontierTile.getX() + 1, frontierTile.getY())) {
             neighbors.push_back(Vector2D(frontierTile.getX() + 1, frontierTile.getY()));
@@ -164,17 +193,14 @@ void Pathfinding::PropagateBFS() {
         }
 
         // L11: TODO 2: For each neighbor, if not visited, add it to the frontier queue and visited list
-        for(const auto& neighbor : neighbors) {
-
-            int cost = costSoFar[frontierTile.getX()][frontierTile.getY() * MovementCost(neighbor.getX(), neighbor.getY())];
-			if (std::find(visited.begin(), visited.end(), neighbor) == visited.end()) {
-                costSoFar[neighbor.getX()][neighbor.getY()] = cost;
-				frontierDijkstra.push(std::make_pair(cost,neighbor));
-				visited.push_back(neighbor);
+        for (const auto& neighbor : neighbors) {
+            if (std::find(visited.begin(), visited.end(), neighbor) == visited.end()) {
+                frontier.push(neighbor);
+                visited.push_back(neighbor);
                 //L12 TODO 1: store the position from where the neighbor was reached in the breadcrumbs list
                 breadcrumbs.push_back(frontierTile);
-			}
-		}
+            }
+        }
 
     }
 }
@@ -183,7 +209,7 @@ void Pathfinding::PropagateDijkstra() {
 
     // L12: TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
 
-    bool foundDestination = false;
+    foundDestination = false;
     if (frontierDijkstra.size() > 0) {
         Vector2D frontierTile = frontierDijkstra.top().second;
         Vector2D playerPos = Engine::GetInstance().scene.get()->GetPlayerPosition();
@@ -253,6 +279,7 @@ void Pathfinding::PropagateAStar(ASTAR_HEURISTICS heuristic) {
             ComputePath(frontierTile.getX(), frontierTile.getY());
         }
     }
+
     //If frontier queue contains elements pop the first element and find the neighbors
     if (frontierAStar.size() > 0 && !foundDestination) {
 
@@ -311,18 +338,13 @@ void Pathfinding::PropagateAStar(ASTAR_HEURISTICS heuristic) {
     }
 }
 
-
 int Pathfinding::MovementCost(int x, int y)
 {
     int ret = -1;
 
     if ((x >= 0) && (x < map->GetWidth()) && (y >= 0) && (y < map->GetHeight()))
     {
-        int gid = layerNav->Get(x, y);
-        if (gid == highCostGid) {
-            ret = 5;
-        }
-        else ret = 1;
+        ret = 1;
     }
 
     return ret;

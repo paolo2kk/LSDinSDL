@@ -18,6 +18,8 @@ public:
 	}
 	void SetPosition(Vector2D pos);
 	Vector2D GetPosition();
+	void ResetPath();
+
 public:
 private:
 	SDL_Texture* texture;
@@ -28,4 +30,9 @@ private:
 	Animation idle;
 	PhysBody* pbody;
 	Pathfinding* pathfinding;
+
+	int buscando = 0;
+	
+	States stat = States::WALKING_R;
+
 };
