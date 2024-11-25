@@ -66,18 +66,12 @@ bool EnemyInClass::Update(float dt)
 		Vector2D nextPos = Engine::GetInstance().map->MapToWorld(nextTile.getX(), nextTile.getY());
 		Vector2D dir = nextPos - position;
 		dir.normalized();
-		velocity = b2Vec2(dir.getX(), dir.getY());
+
+		
+		float velocidad = 0.02f; 
+		velocity = b2Vec2(dir.getX() * velocidad, dir.getY() * velocidad);
+
 		pbody->body->SetLinearVelocity(velocity);
-		if (dir.getX() > 0) {
-			stat = States::WALKING_R;
-		}
-		else {
-			stat = States::WALKING_L;
-		}
-	}
-	else {
-		pbody->body->SetLinearVelocity(b2Vec2(0, 0));
-		stat = States::IDLE;
 	}
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
 	b2Transform pbodyPos = pbody->body->GetTransform();
