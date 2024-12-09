@@ -43,18 +43,19 @@ void Box::GravityChange(b2Vec2& velocity)
     auto input = Engine::GetInstance().input.get();
     /*if (canExecuteGrav)
     {*/
-        if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-            velocity = b2Vec2(0, GRAVITY_Y);
-        }
-        else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-            velocity = b2Vec2(0, -GRAVITY_Y);
-        }
-        else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-            velocity = b2Vec2(GRAVITY_Y, 0);
-        }
-        else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-            velocity = b2Vec2(-GRAVITY_Y, 0);
-        }
+    if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || input->GetControllerButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == KEY_REPEAT) {
+        velocity = b2Vec2(0, GRAVITY_Y);
+    }
+    else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || input->GetControllerButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_REPEAT) {
+        velocity = b2Vec2(0, -GRAVITY_Y);
+    }
+    else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || input->GetControllerButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == KEY_REPEAT) {
+        velocity = b2Vec2(GRAVITY_Y, 0);
+    }
+    else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || input->GetControllerButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == KEY_REPEAT) {
+        velocity = b2Vec2(-GRAVITY_Y, 0);
+    }
+
      /*   canExecuteGrav = false;
     }*/
 

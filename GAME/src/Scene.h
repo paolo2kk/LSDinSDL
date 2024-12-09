@@ -29,6 +29,8 @@ public:
 	// Called before render is available
 	bool Awake();
 
+	Vector2D GetPlayerPosition();
+
 	// Called before the first frame
 	bool Start();
 
@@ -39,6 +41,10 @@ public:
 	bool Update(float dt);
 
 	void TriggerManagement();
+
+	void LoadState();
+
+	void SaveState();
 
 	void SetLevel(int stage);
 
@@ -53,6 +59,7 @@ public:
 
 public:
 	int stage = 1;
+	int sceneIndex = 1;
 
 private:
 	SDL_Texture* img;
@@ -61,7 +68,7 @@ private:
 	Vector2D playerps1;
 
 	Enemy* enemy_LVL2;
-
+	ParallaxBackground parallax; 
 	int windowSizeX = 960;
 	//LVL1
 	Box* box1_LVL1;
@@ -71,10 +78,14 @@ private:
 	//LVL2
 	MovingPlatform* mv_pltf_LVL2;
 
+	//LVL7
+	MovingPlatform* mv_pltf_LVL7;
+
 	//scenification
 	const int totalStages = 10;
 	bool isSceneSetted = false;
 	const int boundaryBuffer = 20;
 	bool doneLVL1 = false;
+	bool help = false;
 
 };

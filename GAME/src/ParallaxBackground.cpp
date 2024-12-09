@@ -3,6 +3,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include <SDL2/SDL.h>
+#include "Log.h"
 
 bool ParallaxBackground::Start() {
 
@@ -23,10 +24,10 @@ ParallaxLayer::ParallaxLayer(SDL_Texture* texture, int speed)
 
 // Renderiza una capa de parallax
 void ParallaxLayer::render(SDL_Renderer* renderer, int cameraX) {
-    int renderX = -(cameraX / speed) % width; // Calcula la posición de la textura
+    int renderX = -(cameraX / speed) % width; 
 
-    SDL_Rect srcRect = { 0, 0, width, 480 }; // Ajustar según el tamaño de la capa
-    SDL_Rect destRect = { renderX, 0, width, 480 };
+    SDL_Rect srcRect = { 0, 0, width, 960 };
+    SDL_Rect destRect = { renderX, 0, width, 960};
 
     SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
 
@@ -47,13 +48,19 @@ ParallaxBackground::~ParallaxBackground() {
 bool ParallaxBackground::Update(float dt) {
     //updateAndRender();
     Engine::GetInstance().render.get()->DrawTexture(bgTexture1, 0, 0);
+    Engine::GetInstance().render.get()->DrawTexture(bgTexture2, 0, 0);
+
     return true;  // Continue the update cycle
 }
 
 void ParallaxBackground::updateAndRender() {
 
-    for (ParallaxLayer& layer : layers) {
-        //layer.render(renderer, cameraX);  // Use the stored renderer and cameraX
+    if (player) {  
+        int cameraX = player->position.getX(); 
+        
+        for (ParallaxLayer& layer : layers) {
+            layer.render(renderer, cameraX);
+        }
     }
 }
 

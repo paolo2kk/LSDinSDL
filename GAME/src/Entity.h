@@ -14,7 +14,18 @@ enum class EntityType
 	MOVING_PLATFORMR,
 	MOVING_PLATFORML,
 	ENEMY,
+	ENEMYBFS,
 	UNKNOWN
+};
+
+enum class States
+{
+	IDLE,
+	WALKING_R,
+	WALKING_L,
+	JUMPING,
+	FALLING,
+	DEAD
 };
 
 class PhysBody;

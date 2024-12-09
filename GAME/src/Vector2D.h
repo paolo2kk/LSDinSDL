@@ -14,6 +14,8 @@ public:
     float getY() const;
     void setY(float y);
 
+    bool operator==(const Vector2D& other) const;
+
     // Vector operations
     float magnitude() const;
     Vector2D normalized() const;
@@ -21,9 +23,15 @@ public:
     Vector2D operator-(const Vector2D& other) const;
     Vector2D operator*(float scalar) const;
     Vector2D operator/(float scalar) const;
-
+    bool operator!=(const Vector2D& other) const;
+    bool operator<(const Vector2D& other) const;
     // Output stream operator
     friend std::ostream& operator<<(std::ostream& os, const Vector2D& vec);
+
+    // Calculate distance
+    float distanceMahattan(const Vector2D& other) const;
+    float distanceEuclidean(const Vector2D& other) const;
+    float distanceSquared(const Vector2D& other) const;
 
 private:
     float x;

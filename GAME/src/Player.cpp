@@ -9,9 +9,10 @@
 #include "Physics.h"
 #include "EntityManager.h"
 
-Player::Player() : Entity(EntityType::PLAYER), canChangeDirection(true), isCornerCollision(false)
+Player::Player() : Entity(EntityType::PLAYER), canChangeDirection(true), isCornerCollision(false), godMode(false)
 {
 	name = "Player";
+
 }
 
 Player::~Player() {
@@ -55,45 +56,29 @@ void Player::GravityChange(b2Vec2& velocity)
 	auto input = Engine::GetInstance().input.get();
 
 	// Cambia la dirección sin restricciones complejas
-	if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+	if (input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(11))) {
 		velocity = b2Vec2(0, GRAVITY_Y);
+		
 		currentAnimation = &up;
 		lastDirection = UP;
 	}
-	else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(12))) {
 		velocity = b2Vec2(0, -GRAVITY_Y);
+
 		currentAnimation = &down;
 		lastDirection = DOWN;
 	}
-	else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(13))) {
 		velocity = b2Vec2(GRAVITY_Y, 0);
+		
 		currentAnimation = &left;
 		lastDirection = LEFT;
 	}
-	else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+	else if (input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || input->GetControllerButton(static_cast<SDL_GameControllerButton>(14))) {
 		velocity = b2Vec2(-GRAVITY_Y, 0);
+		
 		currentAnimation = &right;
 		lastDirection = RIGHT;
-	}
-}
-
-void Player::SetAnimation(Direction dir)
-{
-	switch (dir)
-	{
-	case Direction::UP:
-		currentAnimation = &up;
-		break;
-	case Direction::DOWN:
-		currentAnimation = &down;
-		break;
-	case Direction::LEFT:
-		currentAnimation = &left;
-		break;
-	case Direction::RIGHT:
-		currentAnimation = &right;
-		break;
-
 	}
 }
 
@@ -108,6 +93,21 @@ bool Player::Update(float dt)
 
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
+
+	
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		if (godMode == false) {
+			godMode = true;
+		}
+		else if (godMode == true) {
+			godMode = false;
+		}
+	}
+	if (godMode == true) {
+		
+		//dibujar texto más adelante
+		
+	}
 	return true;
 }
 
@@ -116,6 +116,27 @@ bool Player::CleanUp()
 	LOG("Cleanup player");
 	Engine::GetInstance().textures.get()->UnLoad(texture);
 	return true;
+}
+
+void Player::SetAnimation(Direction dir)
+{
+	switch (dir)
+	{
+	case UP:
+		currentAnimation = &up;
+		break;
+	case DOWN:
+		currentAnimation = &down;
+		break;
+	case LEFT:
+		currentAnimation = &left;
+		break;
+	case RIGHT:
+		currentAnimation = &right;
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
@@ -144,15 +165,20 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		canChangeDirection = true;
 		currentCollider = physB->ctype;
 		break;
+		
+
 	case ColliderType::ENEMY:
 		LOG("Collided an enemy");
-		isDead = true;
+		if (godMode == false) {
+			isDead = true;
+		}
+		else if (godMode == true)  isDead = false;
+
 		break;
 	case ColliderType::BOX:
 		velocity.Set(0, 0);
 		canChangeDirection = true;
 		lastDirection = NONE;
-		currentAnimation = &right;
 		break;
 	default:
 		break;

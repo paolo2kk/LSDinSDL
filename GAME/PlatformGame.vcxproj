@@ -112,7 +112,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);SDL2main.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\vcpkg_installed\x64-windows\x64-windows\lib\manual-link;C:\Users\gpauc\Documents\GitHub\Desenvolupament\GAME\vcpkg_installed\x64-windows\x64-windows\lib\manual-link;C:\Users\Marc Amo\OneDrive\Desktop\Desenvolupament\GAME\vcpkg_installed\x64-windows\x64-windows\lib\manual-link</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\vcpkg_installed\x64-windows\x64-windows\lib\manual-link;C:\Users\gpauc\Documents\GitHub\Desenvolupament\GAME\vcpkg_installed\x64-windows\x64-windows\lib\manual-link;C:\Users\Marc Amo\OneDrive\Desktop\Desenvolupament\GAME\vcpkg_installed\x64-windows\x64-windows\lib\manual-link;C:\Users\gpauc\Documents\GitHub\LSDinSDL\GAME\vcpkg_installed\x64-windows\x64-windows\lib\manual-link</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /E /I /Y "$(ProjectDir)Assets" "$(OutDir)Assets"</Command>
@@ -149,6 +149,7 @@
     <ClCompile Include="src\Box.cpp" />
     <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\EnemyInClass.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Input.cpp" />
@@ -156,8 +157,10 @@
     <ClCompile Include="src\Log.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\MovingPlatform.cpp" />
+    <ClCompile Include="src\Murcielago.cpp" />
     <ClCompile Include="src\ParallaxBackground.cpp" />
     <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\Pathfinding.cpp" />
     <ClCompile Include="src\PerfTimer.cpp" />
     <ClCompile Include="src\Physics.cpp" />
     <ClCompile Include="src\PlatformGame.cpp" />
@@ -176,6 +179,7 @@
     <ClInclude Include="src\Box.h" />
     <ClInclude Include="src\Door.h" />
     <ClInclude Include="src\Enemy.h" />
+    <ClInclude Include="src\EnemyInClass.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\EntityManager.h" />
@@ -185,8 +189,10 @@
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\MovingPlatform.h" />
+    <ClInclude Include="src\Murcielago.h" />
     <ClInclude Include="src\ParallaxBackground.h" />
     <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\Pathfinding.h" />
     <ClInclude Include="src\PerfTimer.h" />
     <ClInclude Include="src\Physics.h" />
     <ClInclude Include="src\Player.h" />
@@ -200,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="config.xml" />
+    <Xml Include="stages.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

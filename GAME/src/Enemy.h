@@ -1,4 +1,3 @@
-// Enemy.h
 
 #pragma once
 
@@ -7,6 +6,7 @@
 #include "Physics.h"
 #include "PerfTimer.h"  // Include the PerfTimer header
 #include "Animation.h"
+#include "Pathfinding.h"
 
 struct SDL_Texture;
 
@@ -21,7 +21,7 @@ public:
     void GravityChange(b2Vec2& velocity);
     bool Update(float dt);
     bool CleanUp();
-    
+
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
     void SetParameters(pugi::xml_node parameters) {
@@ -32,7 +32,7 @@ public:
         pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(newPosition.getX()), PIXEL_TO_METERS(newPosition.getY())), 0);
     }
 public:
-    
+
     pugi::xml_node parameters;
 
     // Enemy parameters
@@ -59,4 +59,6 @@ public:
     bool canExecuteGrav = true;
 
     PerfTimer perfTimer;
+    
+
 };

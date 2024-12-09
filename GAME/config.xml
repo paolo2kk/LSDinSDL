@@ -3,7 +3,7 @@
 <config>
   <engine>
     <title>My platformer game</title>
-    <maxFrameDuration value="8"/>
+    <maxFrameDuration value="16"/>
   </engine>
 
   <render>
@@ -56,7 +56,7 @@
 			</up>
         </animations>
        </player>
-	   <enemy x="160" y="832" w="64" h ="64" texture="Assets/Textures/Enemy.png">
+	   <enemy x="120" y="100" w="64" h ="64" texture="Assets/Textures/Enemy.png">
 		 <animations>
 			 <left loop="true" speed ="0.2">
 				 <frame x="0" y="0" w="64" h="64"/>

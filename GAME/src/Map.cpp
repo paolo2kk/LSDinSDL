@@ -28,13 +28,77 @@ bool Map::Awake()
 }
 
 bool Map::Start() {
-
-    return true;
+    
+    return true;   
 }
 
 bool Map::Update(float dt)
 {
     bool ret = true;
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -Engine::GetInstance().render.get()->camera.x * 0.4, -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, Engine::GetInstance().render.get()->camera.x * (backgroundvelocityX + 0.01), -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+    Engine::GetInstance().render.get()->DrawTexture(Background3, Engine::GetInstance().render.get()->camera.x * (backgroundvelocityX + 0.03), -Engine::GetInstance().render.get()->camera.y * backgroundvelocityY);
+
+    BG1OffsetX += BG1Speed * dt;
+    BG2OffsetX += BG2Speed * dt;
+    BG3OffsetX += BG3Speed * dt;
+    BG4OffsetX += BG4Speed * dt;
+
+    if (BG1OffsetX >= 960) BG1OffsetX -= 960;
+    if (BG2OffsetX >= 960) BG2OffsetX -= 960;
+    if (BG3OffsetX >= 960) BG3OffsetX -= 960;
+    if (BG4OffsetX >= 960) BG4OffsetX -= 960;
+
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 2, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 2, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 3, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 3, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 4, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 4, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 5, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 5, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 6, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 6, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 7, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 7, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 8, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 8, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 9, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 9, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background1, -BG1OffsetX + 960 * 10, 0);
+
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX, 0);
+    Engine::GetInstance().render.get()->DrawTexture(Background2, -BG2OffsetX + 960 * 10, 0);
 
     if (mapLoaded) {
 
@@ -71,7 +135,24 @@ bool Map::Update(float dt)
 
     return ret;
 }
+Vector2D Map::WorldToMap(int x, int y) {
 
+    Vector2D ret(0, 0);
+
+    if (mapData.orientation == MapOrientation::ORTOGRAPHIC) {
+        ret.setX(x / mapData.tileWidth);
+        ret.setY(y / mapData.tileHeight);
+    }
+
+    if (mapData.orientation == MapOrientation::ISOMETRIC) {
+        float half_width = mapData.tileWidth / 2;
+        float half_height = mapData.tileHeight / 2;
+        ret.setX(int((x / half_width + y / half_height) / 2));
+        ret.setY(int((y / half_height - (x / half_width)) / 2));
+    }
+
+    return ret;
+}
 // L09: TODO 2: Implement function to the Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
@@ -112,7 +193,9 @@ bool Map::CleanUp()
 bool Map::Load(std::string path, std::string fileName)
 {
     bool ret = false;
-
+    Background1 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
+    Background2 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer2.png");
+    Background3 = Engine::GetInstance().textures.get()->Load("Assets/Textures/layer1.png");
     // Assigns the name of the map file and the path
     mapFileName = fileName;
     mapPath = path;
@@ -136,6 +219,8 @@ bool Map::Load(std::string path, std::string fileName)
         mapData.tileHeight = mapFileXML.child("map").attribute("tileheight").as_int();
 
         // L06: TODO 4: Implement the LoadTileSet function to load the tileset properties
+
+		mapData.orientation = MapOrientation::ORTOGRAPHIC;
        
         //Iterate the Tileset
         for(pugi::xml_node tilesetNode = mapFileXML.child("map").child("tileset"); tilesetNode!=NULL; tilesetNode = tilesetNode.next_sibling("tileset"))
@@ -218,6 +303,7 @@ bool Map::Load(std::string path, std::string fileName)
                 platform->ctype = colliderType;
             }
         }
+        
         // L08 TODO 3: Create colliders
         // L08 TODO 7: Assign collider type
         // Later you can create a function here to load and create the colliders from the map
@@ -287,7 +373,15 @@ bool Map::Load(std::string path, std::string fileName)
     mapLoaded = ret;
     return ret;
 }
-
+MapLayer* Map::GetNavigationLayer() {
+    for (const auto& layer : mapData.layers) {
+        if (layer->properties.GetProperty("Navigation") != NULL &&
+            layer->properties.GetProperty("Navigation")->value) {
+            return layer;
+        }
+    }
+    return nullptr;
+}
 // L07: TODO 8: Create a method that translates x,y coordinates from map positions to world positions
 Vector2D Map::MapToWorld(int x, int y) const
 {
